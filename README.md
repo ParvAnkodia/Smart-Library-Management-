@@ -1,86 +1,21 @@
-# Smart-Library-Management-
-#include <iostream>
-#include <fstream>
-#include <string>
-using namespace std;
+Smart Library Management System — C++ Project
+A console-based Library Management System built using C++ to automate the process of managing books in a library. The system allows users to add new books, view available books, and manage book records using Object-Oriented Programming (OOP) concepts and file handling.
 
-class Book {
-public:
-    int id;
-    string title;
-    string author;
+Features:
+Add new books with details like Book ID, Title, and Author
 
-    void input() {
-        cout << "Enter Book ID: ";
-        cin >> id;
-        cin.ignore();
-        cout << "Enter Book Title: ";
-        getline(cin, title);
-        cout << "Enter Book Author: ";
-        getline(cin, author);
-    }
+View all stored books from the library database
 
-    void display() {
-        cout << "ID: " << id << ", Title: " << title << ", Author: " << author << endl;
-    }
-};
+Store and retrieve data using file handling (permanent storage)
 
-void addBook() {
-    ofstream file("library.txt", ios::app);
-    Book b;
-    b.input();
-    file.write((char*)&b, sizeof(b));
-    file.close();
-    cout << "Book Added Successfully!\n";
-}
+Simple user-friendly menu-driven interface
 
-void displayBooks() {
-    ifstream file("library.txt");
-    Book b;
-    while (file.read((char*)&b, sizeof(b))) {
-        b.display();
-    }
-    file.close();
-}
+Implemented using C++ classes and objects
 
-void searchBook(int bookID) {
-    ifstream file("library.txt");
-    Book b;
-    bool found = false;
-    while (file.read((char*)&b, sizeof(b))) {
-        if (b.id == bookID) {
-            cout << "Book Found!\n";
-            b.display();
-            found = true;
-            break;
-        }
-    }
-    file.close();
-    if (!found) cout << "Book Not Found!\n";
-}
+Tech Stack:
+Language: C++
 
-int main() {
-    int choice;
-    do {
-        cout << "\n--- Smart Library Management System ---\n";
-        cout << "1. Add Book\n2. Display Books\n3. Search Book\n4. Exit\n";
-        cout << "Enter Choice: ";
-        cin >> choice;
+Tools: File Handling, Object Oriented Programming (OOP), Command Line Interface (CLI)
 
-        switch (choice) {
-            case 1: addBook(); break;
-            case 2: displayBooks(); break;
-            case 3: {
-                int bookID;
-                cout << "Enter Book ID to Search: ";
-                cin >> bookID;
-                searchBook(bookID);
-                break;
-            }
-            case 4: cout << "Exiting...\n"; break;
-            default: cout << "Invalid Choice!\n";
-        }
-    } while (choice != 4);
+Platform: Windows/Linux/Mac
 
-    return 0;
-}
